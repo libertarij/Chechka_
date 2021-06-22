@@ -1,0 +1,69 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<!--lb4.-->
+@using Microsoft.AspNetCore.Identity;
+@using Chechka.DAL.Entities;
+
+<!--Внедрение класса SignInManager<ApplicationUser>, для проверки регистрации пользователя-->
+@inject SignInManager<ApplicationUser> signInManager
+
+@if (signInManager.IsSignedIn(User))
+{
+    @await Component.InvokeAsync("Cart")
+
+    <div class="dropdown ml-4 nav-color">
+        <div class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @*//Lb7.4.2.2--*@
+            @*<img src="@Url.Action("GetAvatar","Image")" width="30" alt="User" class="rounded bg-light" />*@
+            @*//Lb7.4.2.2--*@
+
+            @*//Lb7.4.2.2{*@
+            <img img-action="GetAvatar" img-controller="Image" width="30" alt="User" class="rounded bg-light" />
+            @*//Lb7.4.2.2{*@
+        </div>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-item-text">
+
+                @*//Lb7.4.2.2--*@
+                @*<img src="@Url.Action("GetAvatar","Image")" width="50" alt="User" class="rounded" />*@
+                @*//Lb7.4.2.2--*@
+
+                @*//Lb7.4.2.2{*@
+                <img img-action="GetAvatar" img-controller="Image" width="30" alt="User" class="rounded bg-light" />
+                @*//Lb7.4.2.2{*@
+
+                @User.Identity.Name
+            </div>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" asp-controller="Product" asp-action="UserProducts">Мои товары</a>
+                @*<a class="dropdown-item" asp-area="Identity" asp-page="/Account/Logout">Log off</a>*@
+                <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnurl="@ViewContext.HttpContext.Request.Path">
+                    <input type="submit" value="Log off" class="dropdown-item" />
+                </form>
+            </div>
+        </div>
+        }
+        else
+        {
+            <ul class="nav navbar-nav ml-auto">
+                <li>
+                    <a class="nav-item nav-link"
+                       asp-area="Identity"
+                       asp-page="/Account/Login">
+                        Войти
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-item nav-link"
+                       asp-area="Identity"
+                       asp-page="/Account/Register">
+                        Зарегистрироваться
+                    </a>
+                </li>
+            </ul>
+        }

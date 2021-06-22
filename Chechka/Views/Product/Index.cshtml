@@ -1,0 +1,80 @@
+﻿@*Lb6.4.4.3--*@
+@*@model IEnumerable<ComputerPart>*@
+@*Lb6.4.4.3--*@
+
+@*Lb6.4.4.3*@
+@model ListViewModel<ComputerPart>
+
+@{
+    ViewData["Title"] = "Меню";
+
+    //Lb6.4.6.1
+    //Разметка меню выбора группы
+    var categories = ViewData["Groups"] as IEnumerable<ComputerPartGroup>;
+    int currentGroup = (int)ViewData["CurrentGroup"];
+
+    var text = currentGroup != 0
+        ? categories
+            .FirstOrDefault(g => g.ComputerPartGroupId == currentGroup)?
+            .GroupName
+        : "Все";
+}
+
+<div class="row">
+    @*Lb6.4.6.1{*@
+    <div class="col-2">
+        <div class="dropdown mt-2">
+            <a class="btn btn-secondary dropdown-toggle"
+               asp-action="Index" asp-controller="Product" 
+               role="button"
+               id="dropdownMenuLink"
+               data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                @text
+            </a>
+
+            <div class="dropdown-menu"
+                 aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item"
+                   asp-action="Index"
+                   asp-controller="Product">Все</a>
+                @foreach (var item in categories)
+                {
+                    <a class="dropdown-item"
+                       asp-action="Index"
+                       asp-controller="Product"
+                       asp-route-group="@item.ComputerPartGroupId"
+                       asp-route-pageNo="1">@item.GroupName</a>
+                }
+            </div>
+        </div>
+    </div>
+    @*Lb6.4.6.1}*@
+
+<div class="col-10">
+    <div class="card-deck">
+
+        @*//Lb7.4.3.1--*@
+        @*@foreach (var item in Model)
+        {
+            //Lb6.4.5.2
+
+            < partial name = "_ListItemPartial" model = "@item" />
+
+        }*@
+
+        @*//Lb7.4.3.1*@
+        <div class="card-group" id="list">
+            <partial name="_ListPartial" model="@Model" />
+        </div>
+
+    </div>
+        @*Lb7.4.1.3{*@
+        <pager page-current="@Model.CurrentPage"
+               page-total="@Model.TotalPages"
+               action="Index"
+               controller="Product"
+               group-id="@currentGroup"></pager>
+        @*Lb7.4.1.3}*@
+    </div>
+</div>

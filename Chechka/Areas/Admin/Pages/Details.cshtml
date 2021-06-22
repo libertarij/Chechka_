@@ -1,0 +1,49 @@
+﻿@page
+@model Chechka.Areas.Admin.Pages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ComputerPart</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ComputerPart.ComputerPartName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ComputerPart.ComputerPartName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ComputerPart.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ComputerPart.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ComputerPart.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ComputerPart.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ComputerPart.Image)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ComputerPart.Image)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ComputerPart.Group)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ComputerPart.Group.ComputerPartGroupId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ComputerPart.ComputerPartId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

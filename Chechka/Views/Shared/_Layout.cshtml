@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Chechka</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="~lib/font-awesome/css/all.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <!--Подключение скриптов-->
+    <script src="lib/jquery/dist/jquery.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+    <header>
+        <div class="container">
+            <!-- Панель навигации -->
+            <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+                <!-- меню сайта -->
+                <a class="navbar-brand" asp-action="Index" asp-controller="Home">903327_Chechka</a>
+                <div class="navbar-nav">
+                    <!-- 3.1.1 -->
+                    @await Component.InvokeAsync("Menu")
+                </div>
+                <!-- меню сайта - конец -->
+                <!-- Информация пользователя -->
+                <!-- 3.2 -->
+                <partial name="_UserPartial" />
+                <!-- Информация пользователя - конец -->
+            </nav> <!-- Панель навигации - конец -->
+        </div><!-- container - конец -->
+    </header><!-- header - конец -->
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="fixed-bottom">
+        <!-- Подвал -->
+        <div class="container">
+            <div class="navbar navbar-dark navbar-expand-md bg-dark">
+                <div class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link" href="http://www.facebook.com">
+                        <i class="fab fa-facebook-f fa-2x"></i>
+                    </a>
+                    <a class="nav-item nav-link" href="http://www.vk.com">
+                        <i class="fab fa-vk fa-2x"></i>
+                    </a>
+                    <a class="nav-item nav-link" href="http://www.twitter.com">
+                        <i class="fab fa-twitter fa-2x"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Подвал - конец -->
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
